@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="B4.PE3.PilleS.Views.PositionContentView">
+    <StackLayout>
+        <Label Text="My Location:" />
+        <Label x:Name="lblPositionStatus" Text="Status" FontSize="Large" />
+        <Label x:Name="lblPositionLatitude" Text="Latitude" FontSize="Large" />
+        <Label x:Name="lblPositionLongitude" Text="Longitude" FontSize="Large" />
+        <Label Text="My Address:" />
+        <Label x:Name="lblStreet" Text="Straat" FontSize="Large" />
+        <Label x:Name="lblNumber" Text="Nummer" FontSize="Large" />
+        <Label x:Name="lblPostal" Text="PostCode" FontSize="Large" />
+        <Label x:Name="lblCity" Text="Gemeente" FontSize="Large" />
+        <Label x:Name="lblCountryCode" Text="Landcode" FontSize="Large" />
+        <Label x:Name="lblCountry" Text="Land" FontSize="Large" />
+
+        <Button x:Name="btnGetLocation" Text="Get Current Location" 
+                    Clicked="OnBtnGetLocationClicked"/>
+        <Button x:Name="btnSaveLocation" Text="Save Current Location"
+                Clicked="OnBtnSaveLocationClicked" IsEnabled="False"/>
+    </StackLayout>
+
+</ContentView>

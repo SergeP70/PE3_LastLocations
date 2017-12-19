@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:B4.PE3.PilleS.ViewModels"
+             x:Class="B4.PE3.PilleS.Views.LocationDetailView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Padding="15" Spacing="10">
+            <Label Text="Latitude" />
+            <Entry Text="{Binding LatitudeString}" Placeholder="Latitude" Keyboard="Text" IsEnabled="False" />
+            <Label Text="Longitude" />
+            <Entry Text="{Binding LongitudeString}" Placeholder="Longitude" Keyboard="Text" IsEnabled="False" />
+            <Label Text="Location Time" />
+            <Entry Text="{Binding LocationTimeString}" Placeholder="Location Time" Keyboard="Telephone" IsEnabled="False" />
+            <Label Text="Location Date" />
+            <Entry Text="{Binding LocationDateString}" Placeholder="Location Time" Keyboard="Telephone" IsEnabled="False" />
+            <Label Text="Optional Location Name" />
+            <Entry Text="{Binding LocationName}" Placeholder="Location Name" Keyboard="Text" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

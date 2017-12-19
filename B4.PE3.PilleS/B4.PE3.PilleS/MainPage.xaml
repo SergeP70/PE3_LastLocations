@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:B4.PE3.PilleS"
+             xmlns:views="clr-namespace:B4.PE3.PilleS.Views"
+             Title="Last Locations"
+             x:Class="B4.PE3.PilleS.MainPage">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <views:PositionContentView x:Name="MainContent"
+               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+               HorizontalOptions="CenterAndExpand" />
+        <Button x:Name="btnPosition" Text="Position" IsEnabled="False"
+                Grid.Row="1" Grid.Column="0"
+                HorizontalOptions="FillAndExpand" 
+                Clicked="OnbtnPositionClicked"/>
+        <Button x:Name="btnTracking" Text="Tracking"
+                Grid.Row="1" Grid.Column="1"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnbtnTrackingClicked"/>
+        <Button x:Name="btnMap" Text="Map"
+                Grid.Row="1" Grid.Column="2"
+                HorizontalOptions="FillAndExpand" 
+                Clicked="OnbtnMapClicked"/>
+        
+    </Grid>
+</ContentPage>

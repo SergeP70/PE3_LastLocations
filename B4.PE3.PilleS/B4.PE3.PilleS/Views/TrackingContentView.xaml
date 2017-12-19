@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:B4.PE3.PilleS.ViewModels"
+             xmlns:bhv="clr-namespace:B4.PE3.PilleS.Behaviors"
+             x:Class="B4.PE3.PilleS.Views.TrackingContentView">
+    
+    <StackLayout Padding="10">
+        <Label Text="GPS Tracking" FontSize="Large" 
+               VerticalOptions="Start"/>
+        <Grid x:Name="grdTracking" VerticalOptions="FillAndExpand"
+              BackgroundColor="WhiteSmoke">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Click on Save Location to add it in the list" FontSize="Small" 
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+            <Label Text="Name List" FontSize="Medium" 
+                   Grid.Row="1" Grid.Column="0"/>
+            <Button x:Name="btnSortList" Text="Sort List"
+                    Grid.Row="1" Grid.Column="2"
+                    Command="{Binding SortCommand}" />
+            <Label Text="Time" Grid.Row="2" Grid.Column="0"/>
+            <Label Text="Breedte" Grid.Row="2" Grid.Column="1" />
+            <Label Text="Lengte" Grid.Row="2" Grid.Column="2" />
+            <StackLayout x:Name="lstTracking"
+                         Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+                <ListView ItemsSource="{Binding Locations}" >
+                    <ListView.Behaviors>
+                        <bhv:EventToCommandBehavior EventName="ItemTapped"
+                                                    Command="{Binding ViewLocationDetailCommand}"
+                                                    EventArgsConverter="{StaticResource ItemTappedEventArgsConv}" />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!-- 4-column grid -->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding LocationTimeString}" Grid.Column="0" />
+                                    <Label Text="{Binding Latitude}" Grid.Column="1" />
+                                    <Label Text="{Binding Longitude}" Grid.Column="2"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <Label Text="Auto Save Location?" 
+                   Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" />
+            <Switch IsToggled="False"
+                    Grid.Row="4" Grid.Column="2" />
+            <Label Text="Update Interval" IsEnabled="False"
+                   Grid.Row="5" Grid.Column="0" />
+            <Label Text="1 minute" 
+                   Grid.Row="5" Grid.Column="2" />
+        </Grid>
+        <Button x:Name="btnSaveLocation" Text="Save Location"
+                    VerticalOptions="End" HorizontalOptions="Center" 
+                    Command="{Binding ShowLocationDetailsCommand}" />
+    </StackLayout>
+</ContentView>
