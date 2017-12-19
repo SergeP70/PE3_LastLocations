@@ -3,12 +3,9 @@ using B4.PE3.PilleS.Domain.Services;
 using B4.PE3.PilleS.Views;
 using Plugin.Geolocator;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -19,7 +16,7 @@ namespace B4.PE3.PilleS.ViewModels
         // Deze ViewModel zal de TrackingContentView (MainView) ondersteunen en bevat bijgevolg een collectie van Location objecten:
         private INavigation navigation;
         private LocationInMemoryService locationService;
-        private Location location, foundLocation;
+        private Location location;
         public ICommand ShowLocationDetailsCommand { get; private set; }
 
         public TrackingViewModel(INavigation navigation)
@@ -30,39 +27,6 @@ namespace B4.PE3.PilleS.ViewModels
             // Initialize the classmates collection
             Locations = new ObservableCollection<Location>(locationService.GetAll().Result);
 
-            // Initialize ICommand properties
-            ShowLocationDetailsCommand = new Command(() =>
-            {
-                foundLocation = PutPositionInLocation();
-                navigation.PushAsync(new LocationDetailView(foundLocation));
-            });
-        }
-
-        //private async Task<Location> PutPositionInLocation()
-        private Location PutPositionInLocation()
-        {
-            // Find current Position and put it in a Location
-            var locator = CrossGeolocator.Current;
-            locator.DesiredAccuracy = 100;
-            var position = (locator.GetPositionAsync(TimeSpan.FromSeconds(10), null, false)).Result;
-
-            if (position == null)
-            {
-                //Maak melding (new Label { Text = "no GPS found" });
-                location = null;
-            }
-            else
-            {
-                location = new Location
-                {
-                    Latitude = position.Latitude,
-                    Longitude = position.Longitude,
-                    LocationTime = (DateTimeOffset)position.Timestamp,
-                    LocationName = "testje",
-                    ListName = "ronde2",
-                };
-            }
-            return location;
         }
 
         private ObservableCollection<Location> locations;
@@ -98,7 +62,6 @@ namespace B4.PE3.PilleS.ViewModels
 
         public ICommand ViewLocationDetailCommand => new Command<Location>(
             (Location loc) => {
-                Debug.WriteLine(loc.LocationName);
                 navigation.PushAsync(new LocationDetailView(loc));
             });
 
@@ -107,6 +70,34 @@ namespace B4.PE3.PilleS.ViewModels
             {
             Locations = new ObservableCollection<Location>(
                 (await locationService.GetAll()).OrderBy(e => e.LocationTime).ToList());
+            });
+
+        public ICommand SaveLocationCommand => new Command(
+            async () =>
+            {
+                // Find current Position and put it in a Location
+                var locator = CrossGeolocator.Current;
+                locator.DesiredAccuracy = 100;
+                var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10), null, false);
+
+                if (position == null)
+                {
+                    //Maak melding (new Label { Text = "no GPS found" });
+                    location = null;
+                }
+                else
+                {
+                    location = new Location
+                    {
+                        Latitude = position.Latitude,
+                        Longitude = position.Longitude,
+                        LocationTime = (DateTimeOffset)position.Timestamp,
+                        LocationName = "testje",
+                        ListName = "ronde2",
+                    };
+                }
+                await navigation.PushAsync(new LocationDetailView(location));
+
             });
     }
 }

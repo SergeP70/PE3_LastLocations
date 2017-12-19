@@ -75,6 +75,6 @@
         </Grid>
         <Button x:Name="btnSaveLocation" Text="Save Location"
                     VerticalOptions="End" HorizontalOptions="Center" 
-                    Command="{Binding ShowLocationDetailsCommand}" />
+                    Command="{Binding SaveLocationCommand}" />
     </StackLayout>
 </ContentView>
