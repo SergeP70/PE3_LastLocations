@@ -1,6 +1,8 @@
 ﻿using B4.PE3.PilleS.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -46,8 +48,8 @@ namespace B4.PE3.PilleS.Domain.Services
         /// <returns></returns>
         public async Task<IEnumerable<Location>> GetAll()
         {
-            //await Task.Delay(1);
-            return InMemLocations;
+            await Task.Delay(0);
+            return InMemLocations.OrderBy(e => e.LocationTime);
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace B4.PE3.PilleS.Domain.Services
         /// <returns></returns>
         public async Task<IEnumerable<Location>> GetByListName(string listName)
         {
-            await Task.Delay(1);
+            await Task.Delay(0);
             return InMemLocations.Where(l => l.ListName == listName);
         }
 

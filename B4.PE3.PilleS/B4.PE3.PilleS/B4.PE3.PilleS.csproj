@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Behaviors\BindableBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Constants\MessageLocations.cs" />
     <Compile Include="Converters\ItemTappedEventArgsConverter.cs" />
     <Compile Include="Domain\Models\Location.cs" />
     <Compile Include="Domain\Services\LocationInMemoryService.cs" />

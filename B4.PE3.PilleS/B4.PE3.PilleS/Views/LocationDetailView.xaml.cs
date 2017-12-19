@@ -13,6 +13,5 @@ namespace B4.PE3.PilleS.Views
             InitializeComponent();
             BindingContext = new LocationViewModel(location, this.Navigation);
         }
-
     }
 }

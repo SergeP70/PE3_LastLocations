@@ -1,7 +1,9 @@
-﻿using B4.PE3.PilleS.ViewModels;
+﻿using B4.PE3.PilleS.Domain.Models;
+using B4.PE3.PilleS.ViewModels;
 using B4.PE3.PilleS.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,6 @@ namespace B4.PE3.PilleS
         public MainPage()
         {
             InitializeComponent();
-
         }
 
         private void OnbtnTrackingClicked(object sender, EventArgs e)

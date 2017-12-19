@@ -1,4 +1,5 @@
-﻿using B4.PE3.PilleS.Domain.Models;
+﻿using B4.PE3.PilleS.Constants;
+using B4.PE3.PilleS.Domain.Models;
 using B4.PE3.PilleS.Domain.Services;
 using B4.PE3.PilleS.Views;
 using Plugin.Geolocator;
@@ -26,6 +27,12 @@ namespace B4.PE3.PilleS.ViewModels
 
             // Initialize the classmates collection
             Locations = new ObservableCollection<Location>(locationService.GetAll().Result);
+
+            // Listen to the messaging center to inform if a location is saved and refresh the Listview
+            MessagingCenter.Subscribe(this, MessageLocations.LocationSaved,
+                async (LocationViewModel sender, Location loc) => {
+                    Locations = new ObservableCollection<Location>(await locationService.GetAll());
+                });
 
         }
 

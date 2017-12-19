@@ -1,4 +1,5 @@
-﻿using B4.PE3.PilleS.Domain.Models;
+﻿using B4.PE3.PilleS.Constants;
+using B4.PE3.PilleS.Domain.Models;
 using B4.PE3.PilleS.Domain.Services;
 using System;
 using System.Collections.ObjectModel;
@@ -131,9 +132,13 @@ namespace B4.PE3.PilleS.ViewModels
         }
 
         public ICommand SaveCommand => new Command(
-            async () => {
+            async () =>
+            {
                 currentLocation.LocationName = LocationName;
+                // Save Location & Publish Message
                 await locationService.SaveLocation(currentLocation);
+                MessagingCenter.Send<LocationViewModel, Location>(this, MessageLocations.LocationSaved, currentLocation);
+                await navigation.PopAsync(true);
             });
     }
 
