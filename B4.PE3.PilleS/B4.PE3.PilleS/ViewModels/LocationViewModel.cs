@@ -137,7 +137,7 @@ namespace B4.PE3.PilleS.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ICommand SaveCommand => new Command(
+        public ICommand SaveLocationCommand => new Command(
             async () =>
             {
                 currentLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName == ListName).FirstOrDefault());

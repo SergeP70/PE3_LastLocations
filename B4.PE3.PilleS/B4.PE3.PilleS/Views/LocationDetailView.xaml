@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:B4.PE3.PilleS.ViewModels"
              x:Class="B4.PE3.PilleS.Views.LocationDetailView">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+        <ToolbarItem Text="Save" Command="{Binding SaveLocationCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="15" Spacing="10">

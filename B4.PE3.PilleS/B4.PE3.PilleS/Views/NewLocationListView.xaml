@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="B4.PE3.PilleS.Views.NewLocationListView">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+        <ToolbarItem Text="Save" Command="{Binding SaveLocationListCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="15" Spacing="10">

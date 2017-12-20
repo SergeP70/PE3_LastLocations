@@ -104,13 +104,14 @@ namespace B4.PE3.PilleS.Domain.Services
             return currentLocationList.TaggedLocations.ToList().OrderBy(l => l.LocationTime);
         }
 
-        public async Task SaveLocationList(LocationList locationList)
+        public async Task SaveLocationList(string locationListName)
         {
             await Task.Delay(1);
             InMemLocations.Add(new LocationList
             {
                 Id = Guid.NewGuid(),
-                ListName = locationList.ListName
+                ListName = locationListName,
+                TaggedLocations= null
             });
         }
 

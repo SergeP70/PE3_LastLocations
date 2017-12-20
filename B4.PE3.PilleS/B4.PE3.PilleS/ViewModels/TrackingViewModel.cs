@@ -33,7 +33,7 @@ namespace B4.PE3.PilleS.ViewModels
             // take the first LocationList
             selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName == "Ronde 1").FirstOrDefault());
             // vervang door: selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.FirstOrDefault());
-            //this.ListName = selectedLocationList.ListName;
+            this.ListName = "";
 
             if (locationService.GetByListName(selectedLocationList.ListName).Result == null)
                 Locations = null;
@@ -46,18 +46,26 @@ namespace B4.PE3.PilleS.ViewModels
                 {
                     Locations = new ObservableCollection<Location>(await locationService.GetByListName(selectedLocationList.ListName));
                 });
+
+            // Listen to the messaging center to inform if a locationList is saved and refresh the Picker
+            MessagingCenter.Subscribe(this, MessageLocations.LocationListSaved,
+                async (TrackingViewModel sender, LocationList locList) =>
+                {
+                    LocationLists = new ObservableCollection<LocationList>(await locationService.GetAll());
+                });
+
         }
 
-        //private string listName;
-        //public string ListName
-        //{
-        //    get { return listName; }
-        //    set
-        //    {
-        //        listName = value;
-        //        RaisePropertyChanged(nameof(ListName));
-        //    }
-        //}
+        private string listName;
+        public string ListName
+        {
+            get { return listName; }
+            set
+            {
+                listName = value;
+                RaisePropertyChanged(nameof(ListName));
+            }
+        }
 
         private ObservableCollection<LocationList> locationLists;
         public ObservableCollection<LocationList> LocationLists
@@ -92,8 +100,16 @@ namespace B4.PE3.PilleS.ViewModels
                     locationListSelectedIndex = value;
                     // trigger some action to take
                     RaisePropertyChanged(nameof(LocationListSelectedIndex));
+                    if (locationListSelectedIndex == -1)
+                        locationListSelectedIndex = 0;
                     selectedLocationList = LocationLists[locationListSelectedIndex];
-                    Locations = new ObservableCollection<Location>(locationService.GetByListName(selectedLocationList.ListName).Result);
+                    var loc = locationService.GetByListName(selectedLocationList.ListName).Result;
+                    if (loc == null)
+                    {
+                        Locations = null;
+                    }
+                    else 
+                        Locations = new ObservableCollection<Location>(loc);
                 }
             }
         }
@@ -163,6 +179,16 @@ namespace B4.PE3.PilleS.ViewModels
                     };
                 }
                 await navigation.PushAsync(new LocationDetailView(selectedLocationList, location));
+            });
+
+        public ICommand SaveLocationListCommand => new Command(
+            async () =>
+            {
+                await locationService.SaveLocationList(ListName);
+                LocationLists = new ObservableCollection<LocationList>(locationService.GetAll().Result);
+                LocationList currentLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName == ListName).FirstOrDefault());
+                MessagingCenter.Send<TrackingViewModel, LocationList>(this, MessageLocations.LocationListSaved, currentLocationList);
+                await navigation.PopAsync(true);
             });
     }
 }
