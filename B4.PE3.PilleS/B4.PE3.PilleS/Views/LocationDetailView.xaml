@@ -14,7 +14,7 @@
             <Entry Text="{Binding LatitudeString}" Placeholder="Latitude" Keyboard="Text" IsEnabled="False" />
             <Label Text="Longitude" />
             <Entry Text="{Binding LongitudeString}" Placeholder="Longitude" Keyboard="Text" IsEnabled="False" />
-            <Label Text="Location Time" />
+            <Label Text="Location Time GMT" />
             <Entry Text="{Binding LocationTimeString}" Placeholder="Location Time" Keyboard="Telephone" IsEnabled="False" />
             <Label Text="Location Date" />
             <Entry Text="{Binding LocationDateString}" Placeholder="Location Time" Keyboard="Telephone" IsEnabled="False" />

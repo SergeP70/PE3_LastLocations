@@ -23,14 +23,15 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Text="Click on Save Location to add it in the list" FontSize="Small" 
+            <Label Text="Click on Save Location to add it in the selected list" FontSize="Small" 
                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-            <Label Text="Name List" FontSize="Medium" 
-                   Grid.Row="1" Grid.Column="0"/>
-            <Button x:Name="btnSortList" Text="Sort List"
+            <Label Text="Select Location List:" FontSize="Medium" 
+                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Picker ItemsSource="{Binding LocationLists}"
                     Grid.Row="1" Grid.Column="2"
-                    Command="{Binding SortCommand}" />
-            <Label Text="Time" Grid.Row="2" Grid.Column="0"/>
+                    ItemDisplayBinding="{Binding ListName}" 
+                    SelectedIndex="{Binding LocationListSelectedIndex}"/>
+            <Label Text="Time GMT" Grid.Row="2" Grid.Column="0"/>
             <Label Text="Breedte" Grid.Row="2" Grid.Column="1" />
             <Label Text="Lengte" Grid.Row="2" Grid.Column="2" />
             <StackLayout x:Name="lstTracking"
