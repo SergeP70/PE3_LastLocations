@@ -64,7 +64,7 @@ namespace B4.PE3.PilleS.Domain.Services
             {
                 Id=Guid.NewGuid(),
                 ListName = "Ronde Leeg",
-                TaggedLocations = null
+                TaggedLocations = new List<Location>{}
             }
         };
 
@@ -111,7 +111,7 @@ namespace B4.PE3.PilleS.Domain.Services
             {
                 Id = Guid.NewGuid(),
                 ListName = locationListName,
-                TaggedLocations= null
+                TaggedLocations = new List<Location> { }
             });
         }
 
@@ -119,21 +119,6 @@ namespace B4.PE3.PilleS.Domain.Services
         {
             await Task.Delay(1);
             LocationList currentLocationList = InMemLocations.FirstOrDefault(l => l.ListName == locationList.ListName);
-
-            if (locationList.TaggedLocations == null)
-            {
-                // Reference null exception
-                locationList.TaggedLocations.Add(
-                    new Location
-                    {
-                        Id = Guid.NewGuid(),
-                        Latitude = location.Latitude,
-                        Longitude = location.Longitude,
-                        LocationTime = location.LocationTime,
-                        LocationName = location.LocationName
-                    });
-            }
-
             locationList.TaggedLocations.Add(new Location
             {
                 Id = Guid.NewGuid(),
@@ -142,7 +127,6 @@ namespace B4.PE3.PilleS.Domain.Services
                 LocationTime = location.LocationTime,
                 LocationName = location.LocationName,
             });
-            await Task.Delay(0);
         }
     }
 }
