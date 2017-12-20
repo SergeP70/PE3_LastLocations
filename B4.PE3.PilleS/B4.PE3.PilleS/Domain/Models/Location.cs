@@ -13,7 +13,6 @@ namespace B4.PE3.PilleS.Domain.Models
         public double Longitude { get; set; }
         public DateTimeOffset LocationTime { get; set; }
         public string LocationName { get; set; }
-        public string ListName { get; set; }
 
         public string LocationTimeString
         {

@@ -17,6 +17,7 @@ namespace B4.PE3.PilleS.ViewModels
         // Deze ViewModel zal de TrackingContentView (MainView) ondersteunen en bevat bijgevolg een collectie van Location objecten:
         private INavigation navigation;
         private LocationInMemoryService locationService;
+        private LocationList locationList, selectedLocationList;
         private Location location;
         public ICommand ShowLocationDetailsCommand { get; private set; }
 
@@ -25,15 +26,15 @@ namespace B4.PE3.PilleS.ViewModels
             this.navigation = navigation;
             locationService = new LocationInMemoryService();
 
-            // Initialize the classmates collection
-            Locations = new ObservableCollection<Location>(locationService.GetAll().Result);
+            // Initialize the location collection
+            selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName=="Ronde1").FirstOrDefault());
+            Locations = new ObservableCollection<Location>(locationService.GetByListName(selectedLocationList.ListName).Result);
 
             // Listen to the messaging center to inform if a location is saved and refresh the Listview
             MessagingCenter.Subscribe(this, MessageLocations.LocationSaved,
                 async (LocationViewModel sender, Location loc) => {
-                    Locations = new ObservableCollection<Location>(await locationService.GetAll());
+                    Locations = new ObservableCollection<Location>(await locationService.GetByListName(selectedLocationList.ListName));
                 });
-
         }
 
         private ObservableCollection<Location> locations;
@@ -62,7 +63,7 @@ namespace B4.PE3.PilleS.ViewModels
         public ICommand SortCommand => new Command(
             async () => {
                 // refresh the list and sort data by Time
-                var sortedLocations = (await locationService.GetAll()).OrderBy(e => e.LocationTime).ToList();
+                var sortedLocations = (await locationService.GetByListName(selectedLocationList.ListName)).OrderBy(e => e.LocationTime).ToList();
                 // reset the collection
                 Locations = new ObservableCollection<Location>(sortedLocations);
             });
@@ -76,7 +77,7 @@ namespace B4.PE3.PilleS.ViewModels
             async () =>
             {
             Locations = new ObservableCollection<Location>(
-                (await locationService.GetAll()).OrderBy(e => e.LocationTime).ToList());
+                (await locationService.GetByListName(selectedLocationList.ListName)).OrderBy(e => e.LocationTime).ToList());
             });
 
         public ICommand SaveLocationCommand => new Command(
@@ -100,7 +101,6 @@ namespace B4.PE3.PilleS.ViewModels
                         Longitude = position.Longitude,
                         LocationTime = (DateTimeOffset)position.Timestamp,
                         LocationName = "testje",
-                        ListName = "ronde2",
                     };
                 }
                 await navigation.PushAsync(new LocationDetailView(location));

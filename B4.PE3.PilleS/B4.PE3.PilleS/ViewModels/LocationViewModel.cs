@@ -15,6 +15,7 @@ namespace B4.PE3.PilleS.ViewModels
         // Deze ViewModel zal de TrackingViewModel (~classmateView) ondersteunen en bevat de nodige velden overeenkomstig het formulier
 
         private LocationInMemoryService locationService;
+        private LocationList currentLocationList;
         private Location currentLocation;
         private INavigation navigation;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,7 +31,6 @@ namespace B4.PE3.PilleS.ViewModels
             this.Longitude = currentLocation.Longitude;
             this.LocationTime = currentLocation.LocationTime;
             this.LocationName = currentLocation.LocationName;
-            this.ListName = currentLocation.ListName;
         }
 
         private double latitude;
@@ -136,7 +136,10 @@ namespace B4.PE3.PilleS.ViewModels
             {
                 currentLocation.LocationName = LocationName;
                 // Save Location & Publish Message
-                await locationService.SaveLocation(currentLocation);
+                await locationService.SaveLocation(currentLocation, new LocationList() {
+                    Id= Guid.NewGuid(),
+                    ListName = "Ronde3"
+                });
                 MessagingCenter.Send<LocationViewModel, Location>(this, MessageLocations.LocationSaved, currentLocation);
                 await navigation.PopAsync(true);
             });

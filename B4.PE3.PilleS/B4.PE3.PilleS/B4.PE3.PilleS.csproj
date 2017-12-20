@@ -43,6 +43,7 @@
     <Compile Include="Constants\MessageLocations.cs" />
     <Compile Include="Converters\ItemTappedEventArgsConverter.cs" />
     <Compile Include="Domain\Models\Location.cs" />
+    <Compile Include="Domain\Models\LocationList.cs" />
     <Compile Include="Domain\Services\LocationInMemoryService.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
