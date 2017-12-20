@@ -60,6 +60,9 @@
     <Compile Include="Views\MapContentView.xaml.cs">
       <DependentUpon>MapContentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewLocationListView.xaml.cs">
+      <DependentUpon>NewLocationListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PositionContentView.xaml.cs">
       <DependentUpon>PositionContentView.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\LocationDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NewLocationListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

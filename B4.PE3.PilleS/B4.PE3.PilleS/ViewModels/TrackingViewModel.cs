@@ -133,6 +133,12 @@ namespace B4.PE3.PilleS.ViewModels
                     (await locationService.GetByListName(selectedLocationList.ListName)).OrderBy(e => e.LocationTime).ToList());
             });
 
+        public ICommand AddLocationListCommand => new Command(
+            async () =>
+            {
+                await navigation.PushAsync(new NewLocationListView());
+            });
+
         public ICommand SaveLocationCommand => new Command(
             async () =>
             {

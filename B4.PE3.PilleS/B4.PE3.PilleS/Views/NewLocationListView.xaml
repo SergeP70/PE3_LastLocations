@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="B4.PE3.PilleS.Views.NewLocationListView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Padding="15" Spacing="10">
+            <Label Text="Please enter a Name for the new List of Locations:" />
+            <Entry Text="{Binding ListName}" Placeholder="List Name" Keyboard="Text" IsEnabled="True" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
