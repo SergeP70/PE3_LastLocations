@@ -8,6 +8,8 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="15" Spacing="10">
+            <Label Text="List Name" />
+            <Entry Text="{Binding ListName}" Placeholder="List Name" Keyboard="Text" IsEnabled="False" />
             <Label Text="Latitude" />
             <Entry Text="{Binding LatitudeString}" Placeholder="Latitude" Keyboard="Text" IsEnabled="False" />
             <Label Text="Longitude" />

@@ -8,10 +8,10 @@ namespace B4.PE3.PilleS.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocationDetailView : ContentPage
     {
-        public LocationDetailView(Location location)
+        public LocationDetailView(LocationList locationList, Location location)
         {
             InitializeComponent();
-            BindingContext = new LocationViewModel(location, this.Navigation);
+            BindingContext = new LocationViewModel(locationList, location, this.Navigation);
         }
     }
 }

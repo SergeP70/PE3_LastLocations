@@ -20,24 +20,26 @@ namespace B4.PE3.PilleS.ViewModels
         private INavigation navigation;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public LocationViewModel(Location currentLocation, INavigation navigation)
+        public LocationViewModel(LocationList currentLocationList, Location currentLocation, INavigation navigation)
         {
             this.navigation = navigation;
             this.currentLocation = currentLocation;
             locationService = new LocationInMemoryService();
-            
+
             // initialize the properties with data from current location
             this.Latitude = currentLocation.Latitude;
             this.Longitude = currentLocation.Longitude;
             this.LocationTime = currentLocation.LocationTime;
             this.LocationName = currentLocation.LocationName;
+            this.ListName = currentLocationList.ListName;
         }
 
         private double latitude;
         public double Latitude
         {
             get { return latitude; }
-            set {
+            set
+            {
                 latitude = value;
                 RaisePropertyChanged(nameof(Latitude));
             }
@@ -57,7 +59,8 @@ namespace B4.PE3.PilleS.ViewModels
         public double Longitude
         {
             get { return longitude; }
-            set {
+            set
+            {
                 longitude = value;
                 RaisePropertyChanged(nameof(Longitude));
             }
@@ -77,7 +80,8 @@ namespace B4.PE3.PilleS.ViewModels
         public DateTimeOffset LocationTime
         {
             get { return locationTime; }
-            set {
+            set
+            {
                 locationTime = value;
                 RaisePropertyChanged(nameof(LocationTime));
             }
@@ -96,7 +100,7 @@ namespace B4.PE3.PilleS.ViewModels
         {
             get
             {
-                string locationDateString = LocationTime.Date.ToString("dd/MM/yyyy"); 
+                string locationDateString = LocationTime.Date.ToString("dd/MM/yyyy");
                 return locationDateString;
             }
         }
@@ -105,7 +109,8 @@ namespace B4.PE3.PilleS.ViewModels
         public string LocationName
         {
             get { return locationName; }
-            set {
+            set
+            {
                 locationName = value;
                 RaisePropertyChanged(nameof(LocationName));
             }
@@ -115,7 +120,8 @@ namespace B4.PE3.PilleS.ViewModels
         public string ListName
         {
             get { return listName; }
-            set {
+            set
+            {
                 listName = value;
                 RaisePropertyChanged(nameof(ListName));
             }
@@ -134,15 +140,14 @@ namespace B4.PE3.PilleS.ViewModels
         public ICommand SaveCommand => new Command(
             async () =>
             {
+                currentLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName == ListName).FirstOrDefault());
                 currentLocation.LocationName = LocationName;
                 // Save Location & Publish Message
-                await locationService.SaveLocation(currentLocation, new LocationList() {
-                    Id= Guid.NewGuid(),
-                    ListName = "Ronde3"
-                });
+                await locationService.SaveLocation(currentLocation, currentLocationList);
                 MessagingCenter.Send<LocationViewModel, Location>(this, MessageLocations.LocationSaved, currentLocation);
                 await navigation.PopAsync(true);
             });
-    }
 
+
+    }
 }

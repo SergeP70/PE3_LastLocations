@@ -4,7 +4,6 @@
              xmlns:vm="clr-namespace:B4.PE3.PilleS.ViewModels"
              xmlns:bhv="clr-namespace:B4.PE3.PilleS.Behaviors"
              x:Class="B4.PE3.PilleS.Views.TrackingContentView">
-    
     <StackLayout Padding="10">
         <Label Text="GPS Tracking" FontSize="Large" 
                VerticalOptions="Start"/>

@@ -26,8 +26,8 @@ namespace B4.PE3.PilleS.ViewModels
             this.navigation = navigation;
             locationService = new LocationInMemoryService();
 
-            // Initialize the location collection
-            selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName=="Ronde1").FirstOrDefault());
+            // Initialize the location collection, take the first LocationList
+            selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.FirstOrDefault());
             Locations = new ObservableCollection<Location>(locationService.GetByListName(selectedLocationList.ListName).Result);
 
             // Listen to the messaging center to inform if a location is saved and refresh the Listview
@@ -70,7 +70,9 @@ namespace B4.PE3.PilleS.ViewModels
 
         public ICommand ViewLocationDetailCommand => new Command<Location>(
             (Location loc) => {
-                navigation.PushAsync(new LocationDetailView(loc));
+
+                navigation.PushAsync(new LocationDetailView(selectedLocationList, loc));
+                
             });
 
         public ICommand RefreshCommand => new Command(
@@ -103,8 +105,7 @@ namespace B4.PE3.PilleS.ViewModels
                         LocationName = "testje",
                     };
                 }
-                await navigation.PushAsync(new LocationDetailView(location));
-
+                await navigation.PushAsync(new LocationDetailView(selectedLocationList, location));
             });
     }
 }

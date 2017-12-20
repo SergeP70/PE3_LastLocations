@@ -15,7 +15,7 @@ namespace B4.PE3.PilleS.Domain.Services
             new LocationList
             {
                 Id=Guid.NewGuid(),
-                ListName = "Ronde1",
+                ListName = "Ronde 1",
                 TaggedLocations = new List<Location>
                 {
                     new Location
@@ -39,7 +39,7 @@ namespace B4.PE3.PilleS.Domain.Services
             new LocationList
             {
                 Id=Guid.NewGuid(),
-                ListName = "Ronde2",
+                ListName = "Ronde 2",
                 TaggedLocations = new List<Location>
                 {
                     new Location
@@ -59,98 +59,103 @@ namespace B4.PE3.PilleS.Domain.Services
                         LocationName="Nieuwpoort",
                     }
                 }
+            },
+            new LocationList
+            {
+                Id=Guid.NewGuid(),
+                ListName = "Ronde Leeg"
             }
         };
 
-        //static List<Location> InMemLocations = new List<Location>
-        //{
-        //    new Location
-        //    {
-        //        Id=Guid.NewGuid(),
-        //        Latitude = 51.1117755,
-        //        Longitude = 3.2281144,
-        //        LocationTime = new DateTimeOffset(2017,12,13,15,23,00,TimeSpan.Zero),
-        //        LocationName="Waardamme",
-        //        ListName="Ronde1"
-        //    },
-        //    new Location
-        //    {
-        //        Id=Guid.NewGuid(),
-        //        Latitude = 51.064980,
-        //        Longitude = 3.101570,
-        //        LocationTime = new DateTimeOffset(2017,11,23,14,30,00, TimeSpan.Zero),
-        //        LocationName="Torhout",
-        //        ListName="Ronde2"
+    //static List<Location> InMemLocations = new List<Location>
+    //{
+    //    new Location
+    //    {
+    //        Id=Guid.NewGuid(),
+    //        Latitude = 51.1117755,
+    //        Longitude = 3.2281144,
+    //        LocationTime = new DateTimeOffset(2017,12,13,15,23,00,TimeSpan.Zero),
+    //        LocationName="Waardamme",
+    //        ListName="Ronde1"
+    //    },
+    //    new Location
+    //    {
+    //        Id=Guid.NewGuid(),
+    //        Latitude = 51.064980,
+    //        Longitude = 3.101570,
+    //        LocationTime = new DateTimeOffset(2017,11,23,14,30,00, TimeSpan.Zero),
+    //        LocationName="Torhout",
+    //        ListName="Ronde2"
 
-        //    },
-        //    new Location
-        //    {
-        //        Id=Guid.NewGuid(),
-        //        Latitude = 51.209348,
-        //        Longitude = 3.224700,
-        //        LocationTime = new DateTimeOffset(2012,08,08,21,30,00, TimeSpan.Zero),
-        //        LocationName="Brugge",
-        //        ListName="Ronde1"
-        //    }
-        //};
+    //    },
+    //    new Location
+    //    {
+    //        Id=Guid.NewGuid(),
+    //        Latitude = 51.209348,
+    //        Longitude = 3.224700,
+    //        LocationTime = new DateTimeOffset(2012,08,08,21,30,00, TimeSpan.Zero),
+    //        LocationName="Brugge",
+    //        ListName="Ronde1"
+    //    }
+    //};
 
 
-        /// <summary>
-        /// Gets all locations in Memory collection
-        /// </summary>
-        /// <returns></returns>
-        public async Task<IEnumerable<LocationList>> GetAll()
-        {
-            await Task.Delay(0);
-            return InMemLocations.OrderBy(e => e.ListName);
-        }
-
-        /// <summary>
-        /// Get all LocationLists in Memory Collection
-        /// </summary>
-        /// <returns></returns>
-        public async Task<IEnumerable<LocationList>> GetLocationLists()
-        {
-            await Task.Delay(0);
-            return InMemLocations.OrderBy(e => e.ListName);
-        }
-
-        /// <summary>
-        /// Gets the locations belonging to the listName
-        /// </summary>
-        /// <param name="listName"></param>
-        /// <returns></returns>
-        public async Task<IEnumerable<Location>> GetByListName(string listName)
-        {
-            await Task.Delay(0);
-            LocationList currentLocationList = InMemLocations.Where(l => l.ListName == listName).FirstOrDefault();
-            return currentLocationList.TaggedLocations.ToList().OrderBy(l => l.LocationTime);
-        }
-
-        public async Task SaveLocationList(LocationList locationList)
-        {
-            await Task.Delay(1);
-            InMemLocations.Add(new LocationList
-            {
-                Id = Guid.NewGuid(),
-                ListName = locationList.ListName
-            });
-        }
-
-        public async Task SaveLocation(Location location, LocationList locationList)
-        {
-            await Task.Delay(1);
-            LocationList currentLocationList = InMemLocations.FirstOrDefault(l => l.ListName == locationList.ListName);
-
-            currentLocationList.TaggedLocations.Add(new Location
-            {
-                Id = Guid.NewGuid(),
-                Latitude = location.Latitude,
-                Longitude = location.Longitude,
-                LocationTime = location.LocationTime,
-                LocationName = location.LocationName,
-            });
-        }
-
+    /// <summary>
+    /// Gets all locations in Memory collection
+    /// </summary>
+    /// <returns></returns>
+    public async Task<IEnumerable<LocationList>> GetAll()
+    {
+        await Task.Delay(0);
+        return InMemLocations.OrderBy(e => e.ListName);
     }
+
+    /// <summary>
+    /// Get all LocationLists in Memory Collection
+    /// </summary>
+    /// <returns></returns>
+    public async Task<IEnumerable<LocationList>> GetLocationLists()
+    {
+        await Task.Delay(0);
+        return InMemLocations.OrderBy(e => e.ListName);
+    }
+
+    /// <summary>
+    /// Gets the locations belonging to the listName
+    /// </summary>
+    /// <param name="listName"></param>
+    /// <returns></returns>
+    public async Task<IEnumerable<Location>> GetByListName(string listName)
+    {
+        await Task.Delay(0);
+        LocationList currentLocationList = InMemLocations.Where(l => l.ListName == listName).FirstOrDefault();
+        return currentLocationList.TaggedLocations.ToList().OrderBy(l => l.LocationTime);
+    }
+
+    public async Task SaveLocationList(LocationList locationList)
+    {
+        await Task.Delay(1);
+        InMemLocations.Add(new LocationList
+        {
+            Id = Guid.NewGuid(),
+            ListName = locationList.ListName
+        });
+    }
+
+    public async Task SaveLocation(Location location, LocationList locationList)
+    {
+        await Task.Delay(1);
+        LocationList currentLocationList = InMemLocations.FirstOrDefault(l => l.ListName == locationList.ListName);
+
+        currentLocationList.TaggedLocations.Add(new Location
+        {
+            Id = Guid.NewGuid(),
+            Latitude = location.Latitude,
+            Longitude = location.Longitude,
+            LocationTime = location.LocationTime,
+            LocationName = location.LocationName,
+        });
+    }
+
+}
 }
