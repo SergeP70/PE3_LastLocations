@@ -10,7 +10,7 @@ namespace B4.PE3.PilleS.Views
         public TrackingContentView()
         {
             InitializeComponent();
-            BindingContext = new TrackingViewModel(this.Navigation);
+            //BindingContext = new TrackingViewModel(this.Navigation);
         }
 
     }

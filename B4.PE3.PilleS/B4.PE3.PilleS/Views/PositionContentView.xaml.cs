@@ -39,7 +39,6 @@ namespace B4.PE3.PilleS.Views
             {
                 lblStreet.Text = "Unable to find address";
             }
-
             var a = address.FirstOrDefault();
             lblStreet.Text = a.Thoroughfare;
             lblNumber.Text = a.SubThoroughfare;

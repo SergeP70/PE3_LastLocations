@@ -16,6 +16,7 @@ namespace B4.PE3.PilleS
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new TrackingViewModel(this.Navigation);
         }
 
         private void OnbtnTrackingClicked(object sender, EventArgs e)

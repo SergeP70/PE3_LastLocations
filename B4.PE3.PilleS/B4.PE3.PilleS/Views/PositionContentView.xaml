@@ -2,23 +2,67 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="B4.PE3.PilleS.Views.PositionContentView">
-    <StackLayout>
-        <Label Text="My Location:" />
-        <Label x:Name="lblPositionStatus" Text="Status" FontSize="Large" />
-        <Label x:Name="lblPositionLatitude" Text="Latitude" FontSize="Large" />
-        <Label x:Name="lblPositionLongitude" Text="Longitude" FontSize="Large" />
-        <Label Text="My Address:" />
-        <Label x:Name="lblStreet" Text="Straat" FontSize="Large" />
-        <Label x:Name="lblNumber" Text="Nummer" FontSize="Large" />
-        <Label x:Name="lblPostal" Text="PostCode" FontSize="Large" />
-        <Label x:Name="lblCity" Text="Gemeente" FontSize="Large" />
-        <Label x:Name="lblCountryCode" Text="Landcode" FontSize="Large" />
-        <Label x:Name="lblCountry" Text="Land" FontSize="Large" />
-
+    <StackLayout Padding="15" Spacing="10" >
+        <Label Text="My Location" FontSize="Large" 
+               VerticalOptions="Start" HorizontalOptions="FillAndExpand"/>
+        <Grid x:Name="grdTracking" VerticalOptions="FillAndExpand"
+              BackgroundColor="WhiteSmoke">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Click on Get Current Location to know where you are" FontSize="Small" 
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+            <Label Text="Status:" 
+                   Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+            <Entry x:Name="lblPositionStatus" Text="Status" Placeholder="Status" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Text="Latitude:" 
+                   Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+            <Entry x:Name="lblPositionLatitude" Text="Latitude" Placeholder="Latitude" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Text="Longitude:" 
+                   Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
+            <Entry x:Name="lblPositionLongitude" Text="Longitude" Placeholder="Longitude" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Text="My Address:" FontSize="Medium"
+                   Grid.Row="4" Grid.Column="0" VerticalOptions="Center"/>
+            <Label Text="Straat:" HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                   Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" />
+            <Entry x:Name="lblStreet" Text="Straat" Placeholder="Straat" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Text="Nummer:" 
+                   Grid.Row="6" Grid.Column="0" VerticalOptions="Center"/>
+            <Entry x:Name="lblNumber" Text="Nummer" Placeholder="Nummer" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Entry x:Name="lblPostal" Text="PostCode" Placeholder="PostCode" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="1"/>
+            <Label Text="Gemeente:" 
+                   Grid.Row="7" Grid.Column="0" VerticalOptions="Center"/>
+            <Entry x:Name="lblCity" Text="Gemeente" Placeholder="Gemeente" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="1"/>
+            <Label Text="Land:" 
+                   Grid.Row="8" Grid.Column="0" VerticalOptions="Center"/>
+            <Entry x:Name="lblCountryCode" Text="Landcode" Placeholder="Landcode" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="1"/>
+            <Entry x:Name="lblCountry" Text="Land" Placeholder="Land" Keyboard="Text" IsEnabled="False"
+                   Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="1"/>
+        </Grid>
         <Button x:Name="btnGetLocation" Text="Get Current Location" 
-                    Clicked="OnBtnGetLocationClicked"/>
-        <Button x:Name="btnSaveLocation" Text="Save Current Location"
-                Clicked="OnBtnSaveLocationClicked" IsEnabled="False"/>
+                        Clicked="OnBtnGetLocationClicked"/>
+        <Button x:Name="btnSaveLocation" Text="Send Current Location"
+                    Clicked="OnBtnSaveLocationClicked" IsEnabled="False"/>
     </StackLayout>
-
 </ContentView>
