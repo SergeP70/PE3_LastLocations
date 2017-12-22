@@ -8,7 +8,7 @@
         <Label Text="GPS Tracking" FontSize="Large" 
                VerticalOptions="Start"/>
         <Grid x:Name="grdTracking" VerticalOptions="FillAndExpand"
-              BackgroundColor="WhiteSmoke">
+              BackgroundColor="WhiteSmoke" Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

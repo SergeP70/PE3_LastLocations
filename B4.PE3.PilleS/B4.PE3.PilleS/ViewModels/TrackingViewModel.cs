@@ -31,8 +31,8 @@ namespace B4.PE3.PilleS.ViewModels
             LocationLists = new ObservableCollection<LocationList>(locationService.GetAll().Result);
             
             // take the first LocationList
-            selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName == "Ronde 1").FirstOrDefault());
-            // vervang door: selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.FirstOrDefault());
+            //selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName == "Ronde 1").FirstOrDefault());
+            selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.FirstOrDefault());
             this.ListName = "";
 
             if (locationService.GetByListName(selectedLocationList.ListName).Result == null)
