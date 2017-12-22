@@ -7,40 +7,38 @@
     <StackLayout Padding="10">
         <Label Text="GPS Tracking" FontSize="Large" 
                VerticalOptions="Start"/>
+        <Label Text="Click on Save Location to add it in the selected list" FontSize="Small" />
+        <StackLayout Orientation="Horizontal" Spacing="10" >
+            <Button x:Name="btnAddLocationList" Text="+" FontSize="Small"
+                    HorizontalOptions="Start" WidthRequest="40" BorderWidth="0" 
+                    Command="{Binding AddLocationListCommand}" />
+            <Label Text="Select Location List:" FontSize="Medium"
+                   HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Picker ItemsSource="{Binding LocationLists}" 
+                    ItemDisplayBinding="{Binding ListName}" 
+                    SelectedIndex="{Binding LocationListSelectedIndex}"
+                    HorizontalOptions="End" />
+        </StackLayout>
         <Grid x:Name="grdTracking" VerticalOptions="FillAndExpand"
-              BackgroundColor="WhiteSmoke" Padding="10">
+              BackgroundColor="WhiteSmoke" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <!--<RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>-->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Text="Click on Save Location to add it in the selected list" FontSize="Small" 
-                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-            <StackLayout Orientation="Horizontal" Spacing="15"
-                         Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <Button x:Name="btnAddLocationList" Text="+" FontSize="Small"
-                        Command="{Binding AddLocationListCommand}" />
-                <Label Text="Select Location List:" FontSize="Medium" />
-            </StackLayout>
-            <Picker ItemsSource="{Binding LocationLists}"
-                    Grid.Row="1" Grid.Column="2"
-                    ItemDisplayBinding="{Binding ListName}" 
-                    SelectedIndex="{Binding LocationListSelectedIndex}"/>
-            <Label Text="Time GMT" Grid.Row="2" Grid.Column="0"/>
-            <Label Text="Breedte" Grid.Row="2" Grid.Column="1" />
-            <Label Text="Lengte" Grid.Row="2" Grid.Column="2" />
+            <Label Text="Time GMT" Grid.Row="0" Grid.Column="0"/>
+            <Label Text="Breedte" Grid.Row="0" Grid.Column="1" />
+            <Label Text="Lengte" Grid.Row="0" Grid.Column="2" />
             <StackLayout x:Name="lstTracking"
-                         Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
-                <ListView ItemsSource="{Binding Locations}" >
+                         Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                <ListView ItemsSource="{Binding Locations}" RowHeight="25">
                     <ListView.Behaviors>
                         <bhv:EventToCommandBehavior EventName="ItemTapped"
                                                     Command="{Binding ViewLocationDetailCommand}"
@@ -59,23 +57,23 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding LocationTimeString}" Grid.Column="0" />
-                                    <Label Text="{Binding Latitude}" Grid.Column="1" />
-                                    <Label Text="{Binding Longitude}" Grid.Column="2"/>
+                                    <Label Text="{Binding LocationTimeString}" Grid.Row="0" Grid.Column="0" FontSize="Small" />
+                                    <Label Text="{Binding Latitude}" Grid.Row="0" Grid.Column="1" FontSize="Small" />
+                                    <Label Text="{Binding Longitude}" Grid.Row="0" Grid.Column="2" FontSize="Small" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <Label Text="Auto Save Location?" 
+            <!--<Label Text="Auto Save Location?" 
                    Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" />
             <Switch IsToggled="False"
                     Grid.Row="4" Grid.Column="2" />
             <Label Text="Update Interval" IsEnabled="False"
                    Grid.Row="5" Grid.Column="0" />
             <Label Text="1 minute" 
-                   Grid.Row="5" Grid.Column="2" />
+                   Grid.Row="5" Grid.Column="2" />-->
         </Grid>
         <Button x:Name="btnSaveLocation" Text="Save Location"
                     VerticalOptions="End" HorizontalOptions="Center" 
