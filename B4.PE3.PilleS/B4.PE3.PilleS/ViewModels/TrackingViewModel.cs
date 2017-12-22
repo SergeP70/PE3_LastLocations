@@ -7,8 +7,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace B4.PE3.PilleS.ViewModels
 {
@@ -17,7 +19,7 @@ namespace B4.PE3.PilleS.ViewModels
         // Deze ViewModel zal de TrackingContentView ondersteunen en bevat bijgevolg een collectie van LocationList en Location objecten:
         private INavigation navigation;
         private LocationInMemoryService locationService;
-        private LocationList locationList, selectedLocationList;
+        private LocationList selectedLocationList;
         private Location location;
         public ICommand ShowLocationDetailsCommand { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,7 +31,7 @@ namespace B4.PE3.PilleS.ViewModels
 
             // Initialize the location collection, 
             LocationLists = new ObservableCollection<LocationList>(locationService.GetAll().Result);
-            
+
             // take the first LocationList
             //selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.Where(l => l.ListName == "Ronde 1").FirstOrDefault());
             selectedLocationList = (LocationList)(locationService.GetLocationLists().Result.FirstOrDefault());
@@ -53,6 +55,17 @@ namespace B4.PE3.PilleS.ViewModels
                 {
                     LocationLists = new ObservableCollection<LocationList>(await locationService.GetAll());
                 });
+
+            Task.Run(async () =>
+            {
+                var locator = CrossGeolocator.Current;
+                locator.DesiredAccuracy = 100;
+
+                var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10), null, false);
+                MyPosition = new Position(position.Latitude, position.Longitude);
+                PinCollection.Add(new Pin() { Position = MyPosition, Type = PinType.Generic, Label = "I'm a Pin" });
+            });
+
 
         }
 
@@ -108,9 +121,32 @@ namespace B4.PE3.PilleS.ViewModels
                     {
                         Locations = null;
                     }
-                    else 
+                    else
                         Locations = new ObservableCollection<Location>(loc);
                 }
+            }
+        }
+
+        //private Position _myPosition = new Position(51.1118, 3.2282099);
+        private Position _myPosition;
+        public Position MyPosition
+        {
+            get { return _myPosition; }
+            set
+            {
+                _myPosition = value;
+                RaisePropertyChanged(nameof(MyPosition));
+            }
+        }
+
+        private ObservableCollection<Pin> _pinCollection = new ObservableCollection<Pin>();
+        public ObservableCollection<Pin> PinCollection
+        {
+            get { return _pinCollection; }
+            set
+            {
+                _pinCollection = value;
+                RaisePropertyChanged(nameof(MyPosition));
             }
         }
 

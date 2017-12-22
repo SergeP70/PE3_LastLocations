@@ -3,5 +3,12 @@
 	<uses-sdk android:minSdkVersion="15" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<application android:label="B4.PE3.PilleS.Android"></application>
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<application android:label="B4.PE3.PilleS.Android">
+		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBsOitVmO_XReFAAT82Evvwh2qoemLqtTk" />
+	</application>
 </manifest>

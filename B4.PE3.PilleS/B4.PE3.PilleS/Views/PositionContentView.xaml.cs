@@ -31,8 +31,11 @@ namespace B4.PE3.PilleS.Views
                 return;
             }
             lblPositionStatus.Text = position.Timestamp.ToString();
+            lblPositionStatus.IsEnabled = true;
             lblPositionLatitude.Text = position.Latitude.ToString();
+            lblPositionLatitude.IsEnabled = true;
             lblPositionLongitude.Text = position.Longitude.ToString();
+            lblPositionLongitude.IsEnabled = true;
 
             var address = await locator.GetAddressesForPositionAsync(position, "RJHqIE53Onrqons5CNOx~FrDr3XhjDTyEXEjng-CRoA~Aj69MhNManYUKxo6QcwZ0wmXBtyva0zwuHB04rFYAPf7qqGJ5cHb03RCDw1jIW8l");
             if (address == null || address.Count() == 0)
@@ -41,11 +44,17 @@ namespace B4.PE3.PilleS.Views
             }
             var a = address.FirstOrDefault();
             lblStreet.Text = a.Thoroughfare;
+            lblStreet.IsEnabled = true;
             lblNumber.Text = a.SubThoroughfare;
+            lblNumber.IsEnabled = true;
             lblPostal.Text = a.PostalCode;
+            lblPostal.IsEnabled = true;
             lblCity.Text = a.Locality;
+            lblCity.IsEnabled = true;
             lblCountryCode.Text = a.CountryCode;
+            lblCountryCode.IsEnabled = true;
             lblCountry.Text = a.CountryName;
+            lblCountry.IsEnabled = true;
         }
 
         private void OnBtnSaveLocationClicked(object sender, EventArgs e)

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Xamarin;
 
 namespace B4.PE3.PilleS.UWP
 {
@@ -59,6 +60,7 @@ namespace B4.PE3.PilleS.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e);
+                FormsMaps.Init("mVFJBdeUnTHE5Omt1ADL~wjCmfLOPYxtDMmtA_SrTPg~AnK5BL07yXBvtgePucCY6D-15mrmtTzt5Y_eVs08LFO7O9VmUEftXSenE9EXqkWc");
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
